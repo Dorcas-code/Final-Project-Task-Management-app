@@ -24,6 +24,7 @@
   },
   "scripts": {
     "start": "nodemon server.js",
+        "dev": "vite",
     "build": "vite build",
     "preview": "vite preview",
     "test": "vitest"
