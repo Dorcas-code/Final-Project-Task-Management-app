@@ -1,1 +1,18 @@
+# POST http://localhost:3000/tasks
+# Content-Type: application/json
+
+# {
+#     "name" :"Task 3",
+#     "due_date": "2026-01-01",
+#     "status": "Not Started"
+# }
+
 GET http://localhost:3000/tasks
+
+PATCH http://localhost:3000/tasks
+Content-Type: application/json      
+
+{ 
+    "status": "In Progress",
+    "id" :"39c47b6e-a455-80d7-985f-d290cff4947d"
+}
