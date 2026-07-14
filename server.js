@@ -12,7 +12,7 @@ const app = express();
 
 app.use(bodyParser.json());
 app.use(cors());
-
+app.use(cors({ origin: '*' }));
 app.get("/tasks", (req, res) => {
   (  async () => {
 const dataSourceId =   process.env.NOTION_DB;
