@@ -6,20 +6,16 @@ function App() {
   const [tasks, setTasks] = useState([]);
   const [name,setName] = useState("");
   const [date, setDate] = useState("");
-
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    // console.log("Task Name:", name);
-    // console.log("Task Date:", date);
-  }
-
-  const fetchTasks = async() => {
+ 
     // With this:
 const codespaceName = "ubiquitous-tribble-q4v6jx6wjqw247gg";
 
 const port = 3000; // Your actual port
 const domain = "app.github.dev";
-const url = `https://${codespaceName}-${port}.${domain}/tasks`;
+ const url = `https://${codespaceName}-${port}.${domain}/tasks`;
+   const fetchTasks = async() => {
+
+
 
     const res= await fetch(url);
         if (!res.ok) {
@@ -27,15 +23,45 @@ const url = `https://${codespaceName}-${port}.${domain}/tasks`;
     }
 
      const data = await res.json();
-    console.log(data);
+
     setTasks(data);
   }
 
-  useEffect(() => {
+    useEffect(() => {
     fetchTasks();
   }, []);
 
-  console.log("Tasks:", tasks);
+  
+
+ const handleSubmit = async(e) => {
+    e.preventDefault();
+  
+      const payload = {
+     key:"value",
+ name: name,
+      due_date: date,
+      status: "Not started"
+  };
+    const res =await fetch( url, {
+     
+    }, {
+      method: 'POST', // Define the HTTP method
+      headers: {
+        'Content-Type': 'application/json' // Tell the server you are sending JSON
+      },
+      body: JSON.stringify(payload) // Convert data to a string string
+    });
+        console.log(res);
+    setName("");
+    setDate("");
+    fetchTasks();
+
+    // console.log("Task Name:", name);
+    // console.log("Task Date:", date);
+  }
+
+ 
+
 
   return (
     <div style={{
@@ -61,6 +87,19 @@ const url = `https://${codespaceName}-${port}.${domain}/tasks`;
           {tasks.map((task) => {
             if(task.status === "Not started"){
               return (
+                <div key={task.id} style={{backgroundColor: "#fef2f2", borderRadius: "5px", padding: "10px", marginBottom: "10px", cursor: "pointer"}}>
+                  <strong>{task.name} </strong>
+                  <span>Due Date: {task.due_date}</span>
+                </div>
+              )
+            }})}
+        </div>
+        
+         <div style={{backgroundColor: "White",  borderRadius: "15px", minHeight:"300px",width:"300px",marginTop:"10px",padding:"15px"}}>
+          <h2 style={{textAlign: "center"}}>In Progress</h2>
+          {tasks.map((task) => {
+            if(task.status === "In progress"){
+              return (
                 <div style={{backgroundColor: "#fef2f2", borderRadius: "5px", padding: "10px", marginBottom: "10px", cursor: "pointer"}}>
                   <strong>{task.name} </strong>
                   <span>Due Date: {task.due_date}</span>
@@ -68,8 +107,18 @@ const url = `https://${codespaceName}-${port}.${domain}/tasks`;
               )
             }})}
         </div>
-        <div></div>
-        <div></div>
+        <div style={{backgroundColor: "White",  borderRadius: "15px", minHeight:"300px",width:"300px",marginTop:"10px",padding:"15px"}}>
+          <h2 style={{textAlign: "center"}}>Completed</h2>
+          {tasks.map((task) => {
+            if(task.status === "Done"){
+              return (
+                <div style={{backgroundColor: "#fef2f2", borderRadius: "5px", padding: "10px", marginBottom: "10px", cursor: "pointer"}}>
+                  <strong>{task.name} </strong>
+                  <span>Due Date: {task.due_date}</span>
+                </div>
+              )
+            }})}
+        </div>
       </div>
     </div>
   );
