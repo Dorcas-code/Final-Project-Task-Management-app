@@ -43,18 +43,20 @@ const domain = "app.github.dev";
       status: "Not started"
   };
     const res =await fetch( url, {
-     
-    }, {
       method: 'POST', // Define the HTTP method
       headers: {
         'Content-Type': 'application/json' // Tell the server you are sending JSON
       },
       body: JSON.stringify(payload) // Convert data to a string string
     });
-        console.log(res);
+     
+    // 2. Check if the HTTP status code is OK (200-299)
+    if (!res.ok) {
+      throw new Error(`HTTP error! Status: ${res.status}`);
+    }
     setName("");
     setDate("");
-    fetchTasks();
+            fetchTasks();
 
     // console.log("Task Name:", name);
     // console.log("Task Date:", date);
@@ -88,7 +90,7 @@ const domain = "app.github.dev";
             if(task.status === "Not started"){
               return (
                 <div key={task.id} style={{backgroundColor: "#fef2f2", borderRadius: "5px", padding: "10px", marginBottom: "10px", cursor: "pointer"}}>
-                  <strong>{task.name} </strong>
+                  {console.log(task.id)}<strong>{task.name} </strong> {console.log(task.name)}
                   <span>Due Date: {task.due_date}</span>
                 </div>
               )
