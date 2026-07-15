@@ -8,7 +8,7 @@ function App() {
   const [date, setDate] = useState("");
  
     // With this:
-const codespaceName = "ubiquitous-tribble-q4v6jx6wjqw247gg";
+const codespaceName = "fantastic-yodel-pw79469x94wh7gg";
 
 const port = 3000; // Your actual port
 const domain = "app.github.dev";

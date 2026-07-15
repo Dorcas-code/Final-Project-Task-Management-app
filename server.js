@@ -11,11 +11,12 @@ const notion = new Client({ auth: process.env.NOTION_API_KEY });
 const app = express();
 
 app.use(bodyParser.json());
-app.use(cors());
+
 app.use(cors({ origin: '*' }));
 app.get("/tasks", (req, res) => {
   (  async () => {
 const dataSourceId =   process.env.NOTION_DB;
+console.log(dataSourceId);
 const response = await notion.dataSources.query({
   data_source_id:  dataSourceId,
 });
@@ -68,8 +69,8 @@ app.patch("/tasks", async (req, res) => {
 
   res.json(response);
 })
-
-app.listen(3000, ()=>{
+const PORT = process.env.PORT || 3000;
+app.listen(PORT, '0.0.0.0', () =>{
   console.log("server is live")
 })
 
