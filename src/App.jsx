@@ -91,7 +91,8 @@ const domain = "app.github.dev";
               return (
                 <div key={task.id} style={{backgroundColor: "#fef2f2", borderRadius: "5px", padding: "10px", marginBottom: "10px", cursor: "pointer"}}>
                   {console.log(task.id)}<strong>{task.name} </strong> {console.log(task.name)}
-                  <span>Due Date: {task.due_date}</span>
+         {/*  <span>Due Date: {task.due_date}</span>*/}
+                     {/* This is a single-line comment inside JSX */}
                 </div>
               )
             }})}
