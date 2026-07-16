@@ -9,14 +9,19 @@ const app = express();
 
 app.use(bodyParser.json());
 
-app.use(cors({ origin: '*' }));
+app.use(cors( {
+  origin: '*'// Replace with your exact frontend URL
+  
+}));
+
+
 const dataSourceId =   process.env.NOTION_DATA_SOURCE;
 
 const notion = new Client({ auth: process.env.NOTION_API_KEY ,   notionVersion: "2025-09-03"});
 
 app.get("/tasks", (req, res) => {
   (  async () => {
-
+ 
 const response = await notion.dataSources.query({
     data_source_id:  dataSourceId,
 });
@@ -28,12 +33,12 @@ const response = await notion.dataSources.query({
       id:item.id,
       name: item.properties.Name.title[0].text.content,
       status: item.properties.Status.status.name,
-      // due_date: item.properties["Due Date"].date.start,
+      due_date: item.properties["Due Date"].date.end,
     }
     //extract only name, state and due date from the 
     final_response.push(obj);
   })
- res.json(final_response);
+res.json(final_response);
     })();
  
 });

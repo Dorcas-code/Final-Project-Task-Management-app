@@ -8,14 +8,19 @@ function App() {
   const [date, setDate] = useState("");
  
     // With this:
+  const codespaceName = "fantastic-yodel-pw79469x94wh7gg";
+  const port = 3000; // Your actual port
+  const domain = "app.github.dev";
+   const url = `https://${codespaceName}-${port}.${domain}/tasks`;
+ console.log(url);  
+ const fetchTasks = async() => {
+
+  // With this:
 const codespaceName = "fantastic-yodel-pw79469x94wh7gg";
 
 const port = 3000; // Your actual port
 const domain = "app.github.dev";
  const url = `https://${codespaceName}-${port}.${domain}/tasks`;
-   const fetchTasks = async() => {
-
-
 
     const res= await fetch(url);
         if (!res.ok) {
@@ -36,11 +41,11 @@ const domain = "app.github.dev";
  const handleSubmit = async(e) => {
     e.preventDefault();
   
-      const payload = {
+  const payload = {
      key:"value",
- name: name,
-      due_date: date,
-      status: "Not started"
+     name: name,
+     due_date: date,
+     status: "Not started"
   };
     const res =await fetch( url, {
       method: 'POST', // Define the HTTP method
@@ -56,7 +61,7 @@ const domain = "app.github.dev";
     }
     setName("");
     setDate("");
-            fetchTasks();
+    fetchTasks();
 
     // console.log("Task Name:", name);
     // console.log("Task Date:", date);
@@ -91,8 +96,8 @@ const domain = "app.github.dev";
               return (
                 <div key={task.id} style={{backgroundColor: "#fef2f2", borderRadius: "5px", padding: "10px", marginBottom: "10px", cursor: "pointer"}}>
                   {console.log(task.id)}<strong>{task.name} </strong> {console.log(task.name)}
-         {/*  <span>Due Date: {task.due_date}</span>*/}
-                     {/* This is a single-line comment inside JSX */}
+         <span>Due Date: {task.due_date}</span>
+
                 </div>
               )
             }})}
