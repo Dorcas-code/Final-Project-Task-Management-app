@@ -6,13 +6,47 @@ function App() {
   const [tasks, setTasks] = useState([]);
   const [name,setName] = useState("");
   const [date, setDate] = useState("");
+  const [column, setColumn] = useState({
+    todo: [],
+    inProgress:[],
+    done:[],
+  })
  
     // With this:
   const codespaceName = "zany-trout-5rv5j95wrr737pr5";
   const port = 3000; // Your actual port
   const domain = "app.github.dev";
    const url = `https://${codespaceName}-${port}.${domain}/tasks`;
- console.log(url);  
+
+
+
+
+useEffect(() => {
+    let ignore = false;
+  const handleTasks = () => {
+  // The Condition
+  const todoTasks = tasks.filter(task => task.status === "Not started");
+  const inProgressTasks = tasks.filter(task => task.status === "In progress");
+  const doneTasks = tasks.filter(task => task.status === "Done");
+  // tasks.map((task) => {
+  //   const filtered = tasks.filter(task => task.completed === false)})
+  setColumn({
+              // Copy all existing properties (name, age, etc.)
+    todo: [...todoTasks ],    
+    inProgress: [...inProgressTasks ],
+    done:[...doneTasks]
+        // Overwrite only the target array property
+  });
+}
+  handleTasks ();
+    return () => {
+    ignore = true; // Cancels the previous effect if dependencyState changes
+  };
+}, [tasks]); 
+console.log(column);
+
+
+
  const fetchTasks = async() => {
 
   // With this:
@@ -33,7 +67,9 @@ const domain = "app.github.dev";
   }
 
     useEffect(() => {
-    fetchTasks();
+
+     fetchTasks();
+ 
   }, []);
 
   
@@ -47,7 +83,7 @@ const domain = "app.github.dev";
      due_date: date,
      status: "Not started"
   };
-    const res =await fetch( url, {
+    const res = await fetch( url, {
       method: 'POST', // Define the HTTP method
       headers: {
         'Content-Type': 'application/json' // Tell the server you are sending JSON
@@ -63,8 +99,7 @@ const domain = "app.github.dev";
     setDate("");
     fetchTasks();
 
-    // console.log("Task Name:", name);
-    // console.log("Task Date:", date);
+   
   }
 
  const handleDragStart = (e,id) => {
@@ -76,7 +111,7 @@ const domain = "app.github.dev";
    e.preventDefault();
    const id = e.dataTransfer.getData("text/plain");
    //get data in format of plain text
-   console.log(id, status);
+  //  console.log(id, status);
      await fetch(url, {
     method: 'PATCH',
     headers: {
@@ -114,7 +149,7 @@ const domain = "app.github.dev";
             if(task.status === "Not started"){
               return (
                 <div draggable onDragStart={(e)=> handleDragStart(e,task.id)} key={task.id} style={{backgroundColor: "#fef2f2", borderRadius: "5px", padding: "10px", marginBottom: "10px", cursor: "pointer"}}>
-                  {console.log(task.id)}<strong>{task.name} </strong> {console.log(task.name)}
+              <strong>{task.name} </strong>
          <span>Due Date: {task.due_date}</span>
 
                 </div>
