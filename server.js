@@ -33,7 +33,7 @@ const response = await notion.dataSources.query({
       id:item.id,
       name: item.properties.Name.title[0].text.content,
       status: item.properties.Status.status.name,
-      due_date: item.properties["Due Date"].date.end,
+      due_date: item.properties["Due Date"].date.start,
     }
     //extract only name, state and due date from the 
     final_response.push(obj);
