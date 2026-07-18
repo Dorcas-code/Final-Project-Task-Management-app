@@ -1,6 +1,9 @@
 import './App.css';
-
-import { useEffect, useState } from "react";
+import React, { useEffect, useState } from "react";
+import {DragDropProvider} from '@dnd-kit/react';
+import {move} from '@dnd-kit/helpers';
+import {Column} from './components/Column/Column';
+import {Task} from './components/Tasks/Task';
 
 function App() {
   const [tasks, setTasks] = useState([]);
@@ -43,7 +46,7 @@ useEffect(() => {
     ignore = true; // Cancels the previous effect if dependencyState changes
   };
 }, [tasks]); 
-console.log(column);
+// console.log(column);
 
 
 
@@ -102,14 +105,17 @@ const domain = "app.github.dev";
    
   }
 
- const handleDragStart = (e,id) => {
-  e.dataTransfer.setData("text/plain", String(id))
+ const handleDragStart = (e, {operation}) => {
+console.log("Item's drag id: "+ operation.source.id);
+ e.dataTransfer.setData("text/plain", String(operation.source.id))
   //
  }
 
   const handleDrop = async(e, status) => {
+
    e.preventDefault();
-   const id = e.dataTransfer.getData("text/plain");
+  
+   const id = operation.dataTransfer.getData("text/plain");
    //get data in format of plain text
   //  console.log(id, status);
      await fetch(url, {
@@ -140,8 +146,36 @@ const domain = "app.github.dev";
         <input type="date"  style={{ height: "30px" ,fontSize:"16px",borderRadius:"5px"} } onChange={(e) => setDate(e.target.value)} value={date}></input>
         <button  style={{ height: "30px " ,fontSize:"16px",borderRadius:"5px" }} >Add Task</button>
       </form>
+      {/* Drag and drop start */}
+ 
       <div style={{ display: "flex", justifyContent:"center",gap:"30px", width:"100%"}}>
-        <div onDragOver={(e)=>e.preventDefault()} 
+      
+      <DragDropProvider
+        onDragStart={(e)=> handleDragStart(e)}
+        onDragOver={(event) => {
+        setColumn((column) => move(column, event));
+        }}
+        
+          // onDragEnd={handleDrop}
+      >
+{Object.entries(column).map(([col, items]) => (
+       <Column id={col} key={col} name={col}>
+      
+        { 
+        items.map((index, arrayIndex) => {
+  console.log(index.id);
+            //  if(task.status === "Not started"){
+            //   return(
+     return    <Task  id={index.id} key={index.id} index={arrayIndex} column={col} name={index.name} dueDate={index.due_date} />
+        //  )
+        //      }
+})}
+      </Column>
+         ))}
+    </DragDropProvider> 
+   </div>
+   {/* <div style={{ display: "flex", justifyContent:"center",gap:"30px", width:"100%"}}></div>
+       <div onDragOver={(e)=>e.preventDefault()} 
              onDrop={(e)=> handleDrop(e, "Not started")}
               style={{backgroundColor: "White",  borderRadius: "15px", minHeight:"300px",width:"300px",marginTop:"10px",padding:"15px"}}>
           <h2 style={{textAlign: "center"}}>Not Started</h2>
@@ -156,7 +190,6 @@ const domain = "app.github.dev";
               )
             }})}
         </div>
-        
          <div onDragOver={(e)=>e.preventDefault()} 
              onDrop={(e)=> handleDrop(e, "In progress")}
              style={{backgroundColor: "White",  borderRadius: "15px", minHeight:"300px",width:"300px",marginTop:"10px",padding:"15px"}}>
@@ -183,10 +216,11 @@ const domain = "app.github.dev";
                   <span>Due Date: {task.due_date}</span>
                 </div>
               )
-            }})}
+            }})} 
         </div>
-      </div>
+  */}
     </div>
+  
   );
 }
 
