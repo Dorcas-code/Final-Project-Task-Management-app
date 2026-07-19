@@ -10,9 +10,9 @@ function App() {
   const [name,setName] = useState("");
   const [date, setDate] = useState("");
   const [column, setColumn] = useState({
-    todo: [],
-    inProgress:[],
-    done:[],
+    "Not started": [],
+    "In progress":[],
+    "Done":[],
   })
  
     // With this:
@@ -35,9 +35,9 @@ useEffect(() => {
   //   const filtered = tasks.filter(task => task.completed === false)})
   setColumn({
               // Copy all existing properties (name, age, etc.)
-    todo: [...todoTasks ],    
-    inProgress: [...inProgressTasks ],
-    done:[...doneTasks]
+    "Not started": [...todoTasks ],    
+    "In progress": [...inProgressTasks ],
+    "Done":[...doneTasks]
         // Overwrite only the target array property
   });
 }
@@ -105,17 +105,20 @@ const domain = "app.github.dev";
    
   }
 
- const handleDragStart = (e, {operation}) => {
-console.log("Item's drag id: "+ operation.source.id);
- e.dataTransfer.setData("text/plain", String(operation.source.id))
+ const handleDragStart = ({operation}) => {
+// console.log("Item's drag id: "+ operation.source.id);
+//  e.dataTransfer.setData("text/plain", String(operation.source.id))
   //
  }
 
-  const handleDrop = async(e, status) => {
+  const handleDrop = async({operation}) => {
 
-   e.preventDefault();
-  
-   const id = operation.dataTransfer.getData("text/plain");
+  // const { active, over } = event;
+  console.log(operation.target.group);
+
+    const id = operation.target.id;
+  const status= operation.target.group;
+  //  const id = operation.dataTransfer.getData("text/plain");
    //get data in format of plain text
   //  console.log(id, status);
      await fetch(url, {
@@ -125,7 +128,7 @@ console.log("Item's drag id: "+ operation.source.id);
     },
     body: JSON.stringify({ id:id, status:status}) // Stringify the payload
   });
-    fetchTasks();
+
   }
 
   return (
@@ -156,17 +159,17 @@ console.log("Item's drag id: "+ operation.source.id);
         setColumn((column) => move(column, event));
         }}
         
-          // onDragEnd={handleDrop}
+       onDragEnd={(e)=> handleDrop(e)}
       >
 {Object.entries(column).map(([col, items]) => (
        <Column id={col} key={col} name={col}>
       
         { 
         items.map((index, arrayIndex) => {
-  console.log(index.id);
+
             //  if(task.status === "Not started"){
             //   return(
-     return    <Task  id={index.id} key={index.id} index={arrayIndex} column={col} name={index.name} dueDate={index.due_date} />
+     return    <Task  id={index.id} key={index.id} index={arrayIndex} column={col} name={index.name} dueDate={index.due_date} status={index.status} />
         //  )
         //      }
 })}

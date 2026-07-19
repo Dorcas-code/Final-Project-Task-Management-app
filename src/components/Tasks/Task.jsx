@@ -1,12 +1,16 @@
 import React from 'react';
 import {useSortable} from '@dnd-kit/react/sortable';
 
-export function Task({id, index, column, name, dueDate}) {
+export function Task({id, index, column, name, dueDate,status}) {
   const {ref, isDragging} = useSortable({
     id,
     index,
    
-    group: column
+    group: column,
+    data:{
+      status,
+      column
+    }
   });
 
   return (
