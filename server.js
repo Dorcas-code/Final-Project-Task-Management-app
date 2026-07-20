@@ -10,8 +10,8 @@ const app = express();
 app.use(bodyParser.json());
 
 app.use(cors( {
-  origin: '*'// Replace with your exact frontend URL
-  
+  origin: '*',// Replace with your exact frontend URL
+    credentials: true
 }));
 
 
