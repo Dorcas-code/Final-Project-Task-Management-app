@@ -23,7 +23,7 @@ function App() {
  //const codespaceName = "/Final-Project-Task-Management-app/";
   //const port = 3000; // Your actual port
   //const domain = "app.github.dev";
-   const url = `https://dorcas-code.github.io/Final-Project-Task-Management-app/tasks`;
+   const url = `/tasks`;
 
 
 
