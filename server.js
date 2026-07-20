@@ -15,9 +15,9 @@ app.use(cors( {
 }));
 
 
-const dataSourceId =   process.env.NOTION_DATA_SOURCE;
+const dataSourceId =   process.env.VITE_NOTION_DATA_SOURCE;
 
-const notion = new Client({ auth: process.env.NOTION_API_KEY ,   notionVersion: "2025-09-03"});
+const notion = new Client({ auth: process.env.VITE_NOTION_API_KEY ,   notionVersion: "2025-09-03"});
 
 app.get("/tasks", (req, res) => {
   (  async () => {
