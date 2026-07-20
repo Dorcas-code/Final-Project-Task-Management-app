@@ -1,4 +1,5 @@
 import React from 'react';
+import Card from 'react-bootstrap/Card';
 import {useSortable} from '@dnd-kit/react/sortable';
 
 export function Task({id, index, column, name, dueDate,status}) {
@@ -15,9 +16,10 @@ export function Task({id, index, column, name, dueDate,status}) {
 
   return (
 
-          <div draggable ref={ref} data-dragging={isDragging}  style={{backgroundColor: "#fef2f2", borderRadius: "5px", padding: "10px", marginBottom: "10px", cursor: "pointer"}}>
-                  <strong>{name} </strong>
-                  <span>Due Date: {dueDate}</span> 
-                </div>
+          <Card draggable ref={ref}  data-dragging={isDragging}  style={{ cursor: "pointer" ,marginBottom:"12px"}}>
+                  <Card.Header>{name} </Card.Header>
+                  <Card.Body>
+                  <Card.Text>Due Date: {dueDate}</Card.Text> </Card.Body>
+                </Card>
   );
 }

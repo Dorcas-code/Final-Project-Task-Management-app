@@ -3,6 +3,7 @@
 import React, { useState } from 'react';
 import { FaCheck, FaTimes } from 'react-icons/fa';
 import 'bootstrap/dist/css/bootstrap.min.css';
+import Table from 'react-bootstrap/Table';
 
 const ViewWeekly = ({tasks, setTasks}) => {
 // const [tasks, settasks] = useState(() => {
@@ -40,7 +41,7 @@ const toggleStatus = (taskId, index) => {
 	  setTasks((prevItems) =>
       prevItems.map((item) =>
         item.id === taskId 
-          ? { ...item, days_between: item.days_between.map((val, i) => i === index ? !val : val) } // Copy object and flip value
+          ? { ...item, status: "In progress", days_between: item.days_between.map((val, i) => i === index ? !val : val) } // Copy object and flip value
           : item // Keep unchanged objects as they are
       )
     );
@@ -62,14 +63,14 @@ return (
 	
 		// console.log(' taskStatus:', taskStatus);
 		return (
-			<table className="table table-bordered mt-2 mb-5" key={task.id}>
+	<Table striped bordered hover className="table table-bordered mt-2 mb-5" key={task.id}>
 		<thead>
 		<tr>
-			<th className="bg-success text-white">task</th>
+			<th className="bg-primary text-white"> Task </th>
 			{ taskWeekDays.map((date) => {
             //  task.map( date => {
           
-               return (<th className="bg-success text-white" key={date}>
+               return (<th className="text-dark" key={date}>
                 {date}
 			</th>)
 			// })
@@ -102,7 +103,7 @@ return (
 			</tr>
 		
 		</tbody>
-			</table>
+			</Table>
 		);
 	})}
 	</div>

@@ -5,6 +5,8 @@ import {move} from '@dnd-kit/helpers';
 import {Column} from './components/Column/Column';
 import {Task} from './components/Tasks/Task';
 import AddHabit from './components/AddHabit/AddHabit';
+import Form from 'react-bootstrap/Form';
+import InputGroup from 'react-bootstrap/InputGroup';
 import ViewWeekly from './components/ViewWeekly/ViewWeekly';
 
 function App() {
@@ -175,26 +177,36 @@ const formattedDate = `${yyyy}-${mm}-${dd}`;
   }
 
   return (
-    <div style={{
+    <div className="bg" style={{
       display: "flex",
       flexDirection: "column",
       justifyContent: "center",
       alignItems: "center",
       minHeight: "100vh",
-      backgroundColor: "#effcff",
+  
     }}>
       {/* form to submit tasks */}
       <h1>Progress Tracker</h1>
       <form style={{
         display: "flex",
-        gap: "10px",}} onSubmit={handleSubmit}>
-        <input type="text" style={{ height: "30px" ,fontSize:"16px",borderRadius:"5px" }} placeholder="Task name" onChange={(e) => setName(e.target.value)}  value={name}></input>
-        <input type="date"  style={{ height: "30px" ,fontSize:"16px",borderRadius:"5px"} } onChange={(e) => setDate(e.target.value)} value={date}></input>
-        <button  style={{ height: "30px " ,fontSize:"16px",borderRadius:"5px" }} >Add Task</button>
+        gap: "10px",marginBottom:"10px"}} onSubmit={handleSubmit}>
+       <InputGroup style={{lineHeight:"32px"}} className="mb-3">
+        <InputGroup.Text id="inputGroup-sizing-sm" style={{lineHeight:"42px"}}>
+          What task?
+        </InputGroup.Text>
+        <Form.Control
+          aria-label="Default"
+          aria-describedby="inputGroup-sizing-sm"
+          type="text"  placeholder="Task name" onChange={(e) => setName(e.target.value)}  value={name}
+        />
+      </InputGroup>
+      
+        <input type="date"  style={{ height: "30px" ,fontSize:"16px",borderRadius:"5px",minWidth:"120px",minHeight:"52px",padding:"10px"} } onChange={(e) => setDate(e.target.value)} value={date}></input>
+        <button className="button-74" >Add Task</button>
       </form>
       {/* Drag and drop start */}
  
-      <div style={{ display: "flex", justifyContent:"center",gap:"30px", width:"100%"}}>
+      <div style={{ display: "flex", justifyContent:"center",gap:"30px", width:"100%", marginBottom:"32px"}}>
       
       <DragDropProvider
         onDragStart={(e)=> handleDragStart(e)}
