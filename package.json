@@ -39,7 +39,7 @@
     "predeploy": "npm run build",
      "deploy": "gh-pages -d dist"
   },
-    "proxy": "https://dorcas-code.github.io/Final-Project-Task-Management-app/",
+
   "eslintConfig": {
     "extends": [
       "react-app",
