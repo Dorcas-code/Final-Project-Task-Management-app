@@ -23,7 +23,7 @@ function App() {
 //  const codespaceName = "/Final-Project-Task-Management-app/";
 //   const port = 3000; // Your actual port
 //   const domain = "app.github.dev";
-   const url = `/tasks`;
+   const url = `/Final-Project-Task-Management-app/tasks`;
   //  const url = `/tasks`;
 
 
@@ -58,11 +58,11 @@ useEffect(() => {
  const fetchTasks = async() => {
 
   // With this:
-const codespaceName = "zany-trout-5rv5j95wrr737pr5";
+// const codespaceName = "zany-trout-5rv5j95wrr737pr5";
 
 // const port = 3000; // Your actual port
 // const domain = "app.github.dev";
- const url = `/tasks`;
+ const url = `/Final-Project-Task-Management-app/tasks`;
 
     const res= await fetch(url);
         if (!res.ok) {
