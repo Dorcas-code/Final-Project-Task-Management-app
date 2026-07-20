@@ -26,14 +26,15 @@ const response = await notion.dataSources.query({
     data_source_id:  dataSourceId,
 });
 
-
+// res.json(response);
   let final_response = [];
   response.results.map((item) => {
     let obj ={
       id:item.id,
       name: item.properties.Name.title[0].text.content,
       status: item.properties.Status.status.name,
-      due_date: item.properties["Due Date"].date.start,
+      start_date: item.properties["Due Date"].date.start,
+      due_date: item.properties["Due Date"].date.end,
     }
     //extract only name, state and due date from the 
     final_response.push(obj);
@@ -47,14 +48,17 @@ app.post("/tasks",async (req, res)=> {
   let name = req.body.name;
   let status = req.body.status;
   let due_date = req.body.due_date;
+  let start_date = req.body.start_date;
+
+console.log("name: "+name+" status: "+status+" due_date: "+due_date+" start_date: "+start_date);
   const response = await notion.pages.create({
     parent: {  data_source_id: process.env.NOTION_DATA_SOURCE },
     properties: {
-       "Name": { "title": [{ "text": { "content": name } }] },
-      "Status": { "status": { "name": status } },
-      "Due Date" : due_date ? { "date": { "start": due_date } }: undefined,
-    },
-  })
+     "Name": { "title": [{ "text": { "content": name } }] },
+    "Status": { "status": { "name": status } },
+   
+    "Due Date": due_date ? { date: {start:start_date, end: due_date } } :undefined,
+}})
 
   res.json(response);
 })

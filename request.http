@@ -1,11 +1,13 @@
-# POST http://localhost:3000/tasks
-# Content-Type: application/json
+POST http://localhost:3000/tasks
+Content-Type: application/json
 
-# {
-#     "name" :"Task 3",
-#     "due_date": "2026-01-01",
-#     "status": "Not Started"
-# }
+{
+    "name" :"Task 3",
+    "status":"Not Started",
+    "start_date":"2026-07-20",
+    "due_date":"2026-07-30"
+ 
+}
 
 
 
@@ -18,4 +20,4 @@
 # }
 
 
-GET http://localhost:3000/tasks
+# GET http://localhost:3000/tasks

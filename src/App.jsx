@@ -4,6 +4,8 @@ import {DragDropProvider} from '@dnd-kit/react';
 import {move} from '@dnd-kit/helpers';
 import {Column} from './components/Column/Column';
 import {Task} from './components/Tasks/Task';
+import AddHabit from './components/AddHabit/AddHabit';
+import ViewWeekly from './components/ViewWeekly/ViewWeekly';
 
 function App() {
   const [tasks, setTasks] = useState([]);
@@ -66,7 +68,40 @@ const domain = "app.github.dev";
 
      const data = await res.json();
 
-    setTasks(data);
+const results = data.map(item => {
+  const start = new Date(item.start_date);
+  const end = new Date(item.due_date);
+  
+  // Calculate difference in milliseconds
+const diffTime = Math.abs(end - start);
+
+// Convert milliseconds to days (1000ms * 60s * 60m * 24h)
+const diffDays = Math.ceil(diffTime / (1000 * 60 * 60 * 24)); 
+
+
+// Method 1: Using Array.from
+const falseArray1 = Array.from({ length: diffDays }, () => false);
+
+// Method 2: Using Array().fill
+const falseArray2 = Array(diffDays).fill(false);
+
+// console.log(falseArray2 ); // Output: [false, false, false]
+  return {
+    ...item,
+    days_between:falseArray2
+  };
+});
+
+// console.log("results:", results);
+  const updatedatas = data.map(dateObj => ({
+    ...dateObj,
+    isCompleted: false // Set your default boolean here
+  }));
+ 
+
+    setTasks(updatedatas);
+        setTasks(results);
+    console.log(tasks);
   }
 
     useEffect(() => {
@@ -76,16 +111,24 @@ const domain = "app.github.dev";
   }, []);
 
   
-
+// console.log('tasks added boolean:', tasks);
  const handleSubmit = async(e) => {
     e.preventDefault();
-  
+
+    const today = new Date();
+const yyyy = today.getFullYear();
+const mm = String(today.getMonth() + 1).padStart(2, '0'); // Months start at 0
+const dd = String(today.getDate()).padStart(2, '0');     // Days start at 1
+const formattedDate = `${yyyy}-${mm}-${dd}`;
+
   const payload = {
      key:"value",
      name: name,
+     start_date: formattedDate,
      due_date: date,
-     status: "Not started"
+     status: "Not started",
   };
+  
     const res = await fetch( url, {
       method: 'POST', // Define the HTTP method
       headers: {
@@ -114,7 +157,7 @@ const domain = "app.github.dev";
   const handleDrop = async({operation}) => {
 
   // const { active, over } = event;
-  console.log(operation.target.group);
+  // console.log(operation.target.group);
 
     const id = operation.target.id;
   const status= operation.target.group;
@@ -176,7 +219,12 @@ const domain = "app.github.dev";
       </Column>
          ))}
     </DragDropProvider> 
+ 
    </div>
+  
+    <ViewWeekly tasks={column["In progress"]} setTasks={setTasks} />
+    {/* <AddHabit/> */}
+   
    {/* <div style={{ display: "flex", justifyContent:"center",gap:"30px", width:"100%"}}></div>
        <div onDragOver={(e)=>e.preventDefault()} 
              onDrop={(e)=> handleDrop(e, "Not started")}
