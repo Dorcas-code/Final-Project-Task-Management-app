@@ -1,5 +1,6 @@
 {
   "name": "codespaces-react",
+  "homepage": "https://dorcas-code.github.io/Final-Project-Task-Management-app/",
   "version": "0.1.0",
   "private": true,
   "type": "module",
@@ -35,6 +36,7 @@
     "build": "vite build",
     "preview": "vite preview",
     "test": "vitest",
+    "predeploy": "npm run build",
      "deploy": "gh-pages -d dist"
   },
   "eslintConfig": {
