@@ -10,7 +10,7 @@ const app = express();
 app.use(bodyParser.json());
 
 app.use(cors( {
-  origin: 'https://dorcas-code.github.io/Final-Project-Task-Management-app',// Replace with your exact frontend URL
+  origin: '*',// Replace with your exact frontend URL
     credentials: true
 }));
 
