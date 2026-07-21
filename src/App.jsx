@@ -86,16 +86,16 @@ const diffTime = Math.abs(end - start);
 const diffDays = Math.ceil(diffTime / (1000 * 60 * 60 * 24)); 
 
 
-// Method 1: Using Array.from
-const falseArray1 = Array.from({ length: diffDays }, () => false);
 
 // Method 2: Using Array().fill
 const falseArray2 = Array(diffDays).fill(false);
+const progressPercent = (item.status === "Done") ? 100 : (item.status === "In progress") ? 10 : 0;
 
 // console.log(falseArray2 ); // Output: [false, false, false]
   return {
     ...item,
-    days_between:falseArray2
+    days_between:falseArray2,
+    progressPercent: progressPercent,
   };
 });
 
@@ -251,7 +251,7 @@ flexDirection: "row",
 
             //  if(task.status === "Not started"){
             //   return(
-     return    <Task  id={index.id} key={index.id} index={arrayIndex} column={col} name={index.name} dueDate={index.due_date} status={index.status} />
+     return    <Task  id={index.id} key={index.id} index={arrayIndex} column={col} name={index.name} dueDate={index.due_date} status={index.status} percent={index.progressPercent} />
         //  )
         //      }
 })}

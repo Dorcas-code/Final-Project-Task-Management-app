@@ -1,8 +1,9 @@
 import React from 'react';
 import Card from 'react-bootstrap/Card';
 import {useSortable} from '@dnd-kit/react/sortable';
+import ProgressBar from 'react-bootstrap/ProgressBar';
 
-export function Task({id, index, column, name, dueDate,status}) {
+export function Task({id, index, column, name, dueDate,status,percent}) {
   const {ref, isDragging} = useSortable({
     id,
     index,
@@ -10,7 +11,8 @@ export function Task({id, index, column, name, dueDate,status}) {
     group: column,
     data:{
       status,
-      column
+      column,
+      percent
     }
   });
 
@@ -20,6 +22,7 @@ export function Task({id, index, column, name, dueDate,status}) {
                   <Card.Header>{name} </Card.Header>
                   <Card.Body>
                   <Card.Text>Due Date: {dueDate}</Card.Text> </Card.Body>
+                  <ProgressBar now={percent} label={`${percent}%`} />
                 </Card>
   );
 }
