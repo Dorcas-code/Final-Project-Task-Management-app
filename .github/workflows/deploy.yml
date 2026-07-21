@@ -22,7 +22,10 @@ jobs:
 
       - name: Build project
         run: npm run build
-
+        env:
+          VITE_NOTION_API_KEY : ${{ secrets.VITE_NOTION_API_KEY }}
+          VITE_NOTION_DB  : ${{ secrets.VITE_NOTION_DB }} 
+          VITE_NOTION_DATA_SOURCE  : ${{ secrets.VITE_NOTION_DATA_SOURCE }} 
       - name: Upload production-ready build files
         uses: actions/upload-artifact@v4
         with:
