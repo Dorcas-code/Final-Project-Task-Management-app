@@ -119,8 +119,9 @@ const falseArray2 = Array(diffDays).fill(false);
 // console.log('tasks added boolean:', tasks);
  const handleSubmit = async(e) => {
     e.preventDefault();
-    console.log("error!!!!");
+   
    if (name === '' || date === '') {
+     console.log("error!!!!");
        setShow(true);
          return (
        
