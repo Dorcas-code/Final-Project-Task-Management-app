@@ -200,12 +200,15 @@ const formattedDate = `${yyyy}-${mm}-${dd}`;
       justifyContent: "center",
       alignItems: "center",
       minHeight: "100vh",
-  
+      width: "100%",
+      height: "100%",
+      padding: "100px 20px",
     }}>
       {/* form to submit tasks */}
-      <h1>Progress Tracker</h1>
+      <h1><b>Progress Tracker</b></h1>
       <form style={{
         display: "flex",
+          flexWrap: "wrap",
         gap: "10px",marginBottom:"10px"}} onSubmit={handleSubmit}>
        <InputGroup style={{lineHeight:"32px"}} className="mb-3" hasValidation>
         <InputGroup.Text id="inputGroup-sizing-sm" style={{lineHeight:"42px"}}>

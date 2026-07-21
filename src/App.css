@@ -4,6 +4,7 @@
 
 .bg{
   background-image: linear-gradient(to top, #fff1eb 0%, #ace0f9 100%);
+
 }
 
 
@@ -40,9 +41,12 @@
 
 @media (min-width: 768px) {
   .button-74 {
+    width:100%;
     min-width: 200px;
     padding: 0 0px;
     max-height: 50px;
   
   }
 }
+
+
