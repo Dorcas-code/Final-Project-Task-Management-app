@@ -23,7 +23,7 @@ function App() {
 //  const codespaceName = "/Final-Project-Task-Management-app/";
 //   const port = 3000; // Your actual port
 //   const domain = "app.github.dev";
-   const url = `/Final-Project-Task-Management-app/tasks`;
+   const url = `https://final-project-task-management-app.onrender.com/tasks`;
   //  const url = `/tasks`;
 
 
@@ -62,7 +62,7 @@ useEffect(() => {
 
 // const port = 3000; // Your actual port
 // const domain = "app.github.dev";
- const url = `/Final-Project-Task-Management-app/tasks`;
+ const url = `https://final-project-task-management-app.onrender.com/tasks`;
 
     const res= await fetch(url);
         if (!res.ok) {
