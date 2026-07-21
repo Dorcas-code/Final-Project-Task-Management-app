@@ -117,7 +117,10 @@ const falseArray2 = Array(diffDays).fill(false);
 // console.log('tasks added boolean:', tasks);
  const handleSubmit = async(e) => {
     e.preventDefault();
-
+   if (name === '' || date === '') {
+      console.log('Input is empty. Action stopped.');
+      return; 
+    }
     const today = new Date();
 const yyyy = today.getFullYear();
 const mm = String(today.getMonth() + 1).padStart(2, '0'); // Months start at 0
