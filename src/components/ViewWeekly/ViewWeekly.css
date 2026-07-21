@@ -1,0 +1,12 @@
+
+@media (max-width: 480px) {
+    Table{
+       max-width:360px;
+     
+    }
+    table.table.table-bordered.mt-2.mb-5.table.table-striped.table-bordered.table-hover {
+    overflow: scroll;
+    display: block;
+    max-width: 360px;
+}
+}

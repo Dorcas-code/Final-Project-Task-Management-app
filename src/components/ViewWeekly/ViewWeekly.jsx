@@ -1,5 +1,5 @@
 // ViewWeekly.js
-
+import './ViewWeekly.css';
 import React, { useState } from 'react';
 import { FaCheck, FaTimes } from 'react-icons/fa';
 import 'bootstrap/dist/css/bootstrap.min.css';

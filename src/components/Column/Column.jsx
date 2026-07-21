@@ -1,6 +1,7 @@
 import React from 'react';
 import {useDroppable} from '@dnd-kit/react';
 import {CollisionPriority} from '@dnd-kit/abstract';
+import './Column.css';
 
 export function Column({children, id, name}) {
   const {isDropTarget, ref} = useDroppable({

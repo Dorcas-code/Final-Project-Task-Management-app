@@ -1,0 +1,14 @@
+
+@media (max-width: 480px) {
+.Column h2{
+font-size: 16px !important;
+font-weight: bold;
+}
+
+.Column{
+
+  min-width: 50% !important;
+  flex-grow: 1 !important;
+  margin-bottom: 10px !important;
+}
+}
