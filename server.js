@@ -52,7 +52,7 @@ app.post("/tasks",async (req, res)=> {
 
 console.log("name: "+name+" status: "+status+" due_date: "+due_date+" start_date: "+start_date);
   const response = await notion.pages.create({
-    parent: {  data_source_id: process.env.NOTION_DATA_SOURCE },
+    parent: {  data_source_id: process.env.VITE_NOTION_DATA_SOURCE },
     properties: {
      "Name": { "title": [{ "text": { "content": name } }] },
     "Status": { "status": { "name": status } },
