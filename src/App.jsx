@@ -8,7 +8,9 @@ import AddHabit from './components/AddHabit/AddHabit';
 import Form from 'react-bootstrap/Form';
 import Alert from 'react-bootstrap/Alert';
 import Button from 'react-bootstrap/Button';
+
 import InputGroup from 'react-bootstrap/InputGroup';
+
 import ViewWeekly from './components/ViewWeekly/ViewWeekly';
 
 function App() {
@@ -205,15 +207,18 @@ const formattedDate = `${yyyy}-${mm}-${dd}`;
       <form style={{
         display: "flex",
         gap: "10px",marginBottom:"10px"}} onSubmit={handleSubmit}>
-       <InputGroup style={{lineHeight:"32px"}} className="mb-3">
+       <InputGroup style={{lineHeight:"32px"}} className="mb-3" hasValidation>
         <InputGroup.Text id="inputGroup-sizing-sm" style={{lineHeight:"42px"}}>
           What task?
         </InputGroup.Text>
         <Form.Control
           aria-label="Default"
-          aria-describedby="inputGroup-sizing-sm"
+          aria-describedby="inputGroup-sizing-sm" required
           type="text"  placeholder="Task name" onChange={(e) => setName(e.target.value)}  value={name}
         />
+               <Form.Control.Feedback type="invalid">
+              Please input a task!
+            </Form.Control.Feedback>
       </InputGroup>
       
         <input type="date"  style={{ height: "30px" ,fontSize:"16px",borderRadius:"5px",minWidth:"120px",minHeight:"52px",padding:"10px"} } onChange={(e) => setDate(e.target.value)} value={date}></input>
