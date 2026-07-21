@@ -31,7 +31,7 @@
     "postcss": "^8.4.31"
   },
   "scripts": {
-    "start": "nodemon server.js",
+    "start": "node server.js",
     "dev": "vite",
     "build": "vite build",
     "preview": "vite preview",
