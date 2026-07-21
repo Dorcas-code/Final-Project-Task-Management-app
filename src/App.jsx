@@ -89,7 +89,7 @@ const diffDays = Math.ceil(diffTime / (1000 * 60 * 60 * 24));
 
 // Method 2: Using Array().fill
 const falseArray2 = Array(diffDays).fill(false);
-const progressPercent = (item.status === "Done") ? 100 : (item.status === "In progress") ? 10 : 0;
+const progressPercent = (item.status === "Done") ? 100 : (item.status === "In progress") ? 10 : 5;
 
 // console.log(falseArray2 ); // Output: [false, false, false]
   return {

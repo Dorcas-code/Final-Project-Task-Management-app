@@ -42,7 +42,7 @@ const toggleStatus = (taskId, index) => {
 	  setTasks((prevItems) =>
       prevItems.map((item) =>
         item.id === taskId 
-          ? { ...item, status: "In progress", days_between: item.days_between.map((val, i) => i === index ? !val : val), progressPercent:(item.days_between.filter(x => x === true).length / (item.days_between.length-2)) * 100} // Copy object and flip value
+          ? { ...item, status: "In progress", days_between: item.days_between.map((val, i) => i === index ? !val : val), progressPercent: Math.max(10, Math.min((item.days_between.filter(x => x === true).length / (item.days_between.length-2)) * 100, 100)) } // Copy object and flip value
           : item // Keep unchanged objects as they are
       )
     );
