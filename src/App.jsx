@@ -6,6 +6,8 @@ import {Column} from './components/Column/Column';
 import {Task} from './components/Tasks/Task';
 import AddHabit from './components/AddHabit/AddHabit';
 import Form from 'react-bootstrap/Form';
+import Alert from 'react-bootstrap/Alert';
+import Button from 'react-bootstrap/Button';
 import InputGroup from 'react-bootstrap/InputGroup';
 import ViewWeekly from './components/ViewWeekly/ViewWeekly';
 
@@ -18,7 +20,7 @@ function App() {
     "In progress":[],
     "Done":[],
   })
- 
+   const [show, setShow] = useState(true);
     // With this:
 //  const codespaceName = "/Final-Project-Task-Management-app/";
 //   const port = 3000; // Your actual port
@@ -118,8 +120,13 @@ const falseArray2 = Array(diffDays).fill(false);
  const handleSubmit = async(e) => {
     e.preventDefault();
    if (name === '' || date === '') {
-      console.log('Input is empty. Action stopped.');
-      return; 
+         return (
+      <Alert variant="danger" onClose={() => setShow(false)} dismissible>
+        <Alert.Heading>Input cannot be empty</Alert.Heading>
+      
+      </Alert>
+    );
+   
     }
     const today = new Date();
 const yyyy = today.getFullYear();
