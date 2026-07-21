@@ -120,7 +120,9 @@ const falseArray2 = Array(diffDays).fill(false);
  const handleSubmit = async(e) => {
     e.preventDefault();
    if (name === '' || date === '') {
+       setShow(true);
          return (
+       
       <Alert variant="danger" onClose={() => setShow(false)} dismissible>
         <Alert.Heading>Input cannot be empty</Alert.Heading>
       
